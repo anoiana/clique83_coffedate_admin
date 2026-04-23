@@ -16,41 +16,41 @@ export const AppLayout: React.FC = () => {
   );
 
   const navItems = [
-    { path: '/dashboard', label: t('navigation.dashboard'), icon: LayoutDashboard },
+    { path: '/dashboard', label: t('layout.navigation.dashboard'), icon: LayoutDashboard },
     {
-      label: t('navigation.users'),
+      label: t('layout.navigation.users'),
       icon: Users,
       isSubmenu: true,
       isOpen: usersMenuOpen,
       toggle: () => setUsersMenuOpen(!usersMenuOpen),
       subItems: [
-        { path: '/user-journey', label: t('navigation.userJourney'), icon: Rocket },
-        { path: '/users', label: t('navigation.userManagement'), icon: Users },
-        { path: '/pending-profiles', label: t('navigation.pendingProfiles'), icon: ClipboardCheck },
+        { path: '/user-journey', label: t('layout.navigation.userJourney'), icon: Rocket },
+        { path: '/users', label: t('layout.navigation.userManagement'), icon: Users },
+        { path: '/pending-profiles', label: t('layout.navigation.pendingProfiles'), icon: ClipboardCheck },
       ]
     },
-    { path: '/demographics', label: t('navigation.demographics'), icon: BarChart3 },
-    { path: '/matching', label: t('navigation.matching'), icon: Heart },
-    { path: '/unmatched', label: t('navigation.unmatched'), icon: SearchX },
-    { path: '/manual-match', label: t('navigation.manualMatch'), icon: UserPlus },
-    { path: '/meetings', label: t('navigation.meetings'), icon: Calendar },
-    { path: '/locations', label: t('navigation.locations'), icon: MapPin },
+    { path: '/demographics', label: t('layout.navigation.demographics'), icon: BarChart3 },
+    { path: '/matching', label: t('layout.navigation.matching'), icon: Heart },
+    { path: '/unmatched', label: t('layout.navigation.unmatched'), icon: SearchX },
+    { path: '/manual-match', label: t('layout.navigation.manualMatch'), icon: UserPlus },
+    { path: '/meetings', label: t('layout.navigation.meetings'), icon: Calendar },
+    { path: '/locations', label: t('layout.navigation.locations'), icon: MapPin },
   ];
 
   const getPageTitle = () => {
     if (location.pathname === '/dashboard') return t('pages.dashboard.title');
-    if (location.pathname === '/user-journey') return t('navigation.userJourney');
+    if (location.pathname === '/user-journey') return t('layout.navigation.userJourney');
     if (location.pathname.startsWith('/users') && location.pathname !== '/users') {
-      if (location.pathname.includes('/user-journey')) return t('navigation.userJourney');
-      return t('navigation.userManagement');
+      if (location.pathname.includes('/user-journey')) return t('layout.navigation.userJourney');
+      return t('layout.navigation.userManagement');
     }
-    if (location.pathname === '/pending-profiles') return t('navigation.pendingProfiles');
-    if (location.pathname === '/demographics') return t('navigation.demographics');
-    if (location.pathname.startsWith('/matching')) return t('navigation.matchingEngine');
-    if (location.pathname === '/unmatched') return t('navigation.unmatchedPool');
-    if (location.pathname === '/manual-match') return t('navigation.forceManualMatch');
-    if (location.pathname === '/meetings') return t('navigation.meetingsManagement');
-    if (location.pathname === '/locations') return t('navigation.meetingLocations');
+    if (location.pathname === '/pending-profiles') return t('layout.navigation.pendingProfiles');
+    if (location.pathname === '/demographics') return t('layout.navigation.demographics');
+    if (location.pathname.startsWith('/matching')) return t('layout.navigation.matchingEngine');
+    if (location.pathname === '/unmatched') return t('layout.navigation.unmatchedPool');
+    if (location.pathname === '/manual-match') return t('layout.navigation.forceManualMatch');
+    if (location.pathname === '/meetings') return t('layout.navigation.meetingsManagement');
+    if (location.pathname === '/locations') return t('layout.navigation.meetingLocations');
     return t('app.title');
   };
 

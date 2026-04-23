@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Typography } from '../../../shared/components';
 import { dashboardApi, LifecycleStage } from '../../../features/dashboard/api/dashboardApi';
-import { Users, UserCheck, Heart, Coffee, CheckCircle2, TrendingDown } from 'lucide-react';
+import { CheckCircle2, TrendingDown } from 'lucide-react';
 
 const UserJourneyPage: React.FC = () => {
     const [stages, setStages] = useState<LifecycleStage[]>([]);
@@ -115,9 +115,5 @@ const UserJourneyPage: React.FC = () => {
         </div>
     );
 };
-
-// Internal icon fix since I can't find BadgeCheck in the standard import
-const Zap = ({ size, color }: any) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>;
-const BadgeCheck = ({ size, color }: any) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76z"/><path d="m9 12 2 2 4-4"/></svg>;
 
 export default UserJourneyPage;
