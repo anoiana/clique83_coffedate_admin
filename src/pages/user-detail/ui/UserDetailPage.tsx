@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Button, Typography, Card, Badge } from '../../../shared/components';
 import { userApi, UserDetail, UserPhoto } from '../../../features/user/api/userApi';
 import { useLoading } from '../../../shared/context/LoadingContext';
-import { RejectionModal } from '../../../features/user/components/RejectionModal';
+import { RejectionModal, ResubmitStep } from '../../../features/user/components/RejectionModal';
+import { optimizeImageUrl } from '../../../shared/lib/cloudinary';
 import { Mail, Calendar, MapPin, CheckCircle, XCircle, Wallet, Image, Eye, EyeOff, Check, Ban, Heart, Activity, Globe, Info, Ruler, Star, Copy, Clock, Target, MessageSquare } from 'lucide-react';
 
 const UserDetailPage: React.FC = () => {
@@ -23,6 +24,9 @@ const UserDetailPage: React.FC = () => {
       setLoading(true);
       try {
         const data = await userApi.getUserById(id);
+        // Debug: verify backend returns photos relation (temporary — remove after verification)
+        // eslint-disable-next-line no-console
+        console.log('[UserDetail] photos:', data.photos);
         setUser(data);
       } catch (error) {
         console.error('Failed to fetch user detail:', error);
@@ -49,36 +53,36 @@ const UserDetailPage: React.FC = () => {
 
   const handleApprove = async () => {
     if (!user) return;
-    if (!confirm('Approve this profile? User will be added to matching pool.')) return;
+    if (!confirm(t('common.confirmation.approveProfile'))) return;
 
     setActionLoading(true);
-    showLoader('APPROVING PROFILE');
+    showLoader(t('loading.approvingProfile'));
     try {
       await userApi.approveUser(user.id);
       setUser(prev => prev ? { ...prev, isInMatchingPool: true, status: 'APPROVED' } : null);
-      alert('Profile approved successfully!');
+      alert(t('pages.users.detail.alerts.approveSuccess'));
     } catch (error) {
       console.error('Failed to approve:', error);
-      alert('Failed to approve profile. Please try again.');
+      alert(t('errors.approveProfile'));
     } finally {
       hideLoader();
       setActionLoading(false);
     }
   };
 
-  const handleConfirmReject = async (reason: string) => {
+  const handleConfirmReject = async (reason: string, resubmitStep?: ResubmitStep) => {
     if (!user) return;
     setRejectionModalOpen(false);
 
     setActionLoading(true);
-    showLoader('REJECTING PROFILE');
+    showLoader(t('loading.rejectingProfile'));
     try {
-      await userApi.rejectUser(user.id, reason);
-      setUser(prev => prev ? { ...prev, status: 'REJECTED', adminRejectionReason: reason } : null);
-      alert('Profile rejected. Email notification will be sent.');
+      await userApi.rejectUser(user.id, reason, resubmitStep);
+      setUser(prev => prev ? { ...prev, status: 'REJECTED', adminStatus: 'REJECTED', adminRejectionReason: reason } : null);
+      alert(t('pages.users.detail.alerts.rejectSuccess'));
     } catch (error) {
       console.error('Failed to reject:', error);
-      alert('Failed to reject profile. Please try again.');
+      alert(t('errors.rejectProfile'));
     } finally {
       hideLoader();
       setActionLoading(false);
@@ -101,7 +105,7 @@ const UserDetailPage: React.FC = () => {
       } : null);
     } catch (error) {
       console.error('Failed to toggle photo visibility:', error);
-      alert('Failed to update photo visibility. Please try again.');
+      alert(t('pages.users.detail.alerts.photoVisibilityFailed'));
     } finally {
       setActionLoading(false);
     }
@@ -138,7 +142,7 @@ const UserDetailPage: React.FC = () => {
         )}
         {user.adminRejectionReason && (
           <Badge variant="danger" style={{ backgroundColor: 'rgba(244, 63, 94, 0.1)', color: 'var(--danger)', fontSize: '12px' }}>
-            Reason: {user.adminRejectionReason}
+            {t('pages.users.detail.reasonBadge', { reason: user.adminRejectionReason })}
           </Badge>
         )}
       </div>
@@ -166,16 +170,16 @@ const UserDetailPage: React.FC = () => {
                 <Typography variant="caption" style={{ color: 'var(--text-secondary)', fontFamily: 'monospace', fontSize: '11px' }}>
                   ID: {user.id}
                 </Typography>
-                <button 
+                <button
                   onClick={() => {
                     navigator.clipboard.writeText(user.id);
-                    alert('Copied ID to clipboard');
+                    alert(t('common.messages.copiedToClipboard'));
                   }}
-                  style={{ 
+                  style={{
                     background: 'none', border: 'none', cursor: 'pointer', padding: '2px',
                     color: 'var(--primary)', display: 'flex', alignItems: 'center', opacity: 0.7
                   }}
-                  title="Copy Full ID"
+                  title={t('pages.users.detail.copyIdButton')}
                 >
                   <Copy size={12} />
                 </button>
@@ -295,12 +299,24 @@ const UserDetailPage: React.FC = () => {
         {/* Main Content */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
 
-          {/* Photo Gallery */}
-          {user.photos && user.photos.length > 0 && (
-            <Card title={t('pages.users.detail.section.photos')}>
+          {/* Photo Gallery — always rendered so admin sees empty state too */}
+          <Card title={t('pages.users.detail.section.photos')}>
+            {(!user.photos || user.photos.length === 0) ? (
+              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                <Image size={32} color="var(--text-secondary)" />
+                <Typography variant="body" style={{ fontSize: '14px', margin: 0 }}>
+                  {t('pages.users.detail.photosEmpty')}
+                </Typography>
+              </div>
+            ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 {['FACE', 'BODY', 'LIFESTYLE', 'OTHER'].map(category => {
-                  const categoryPhotos = user.photos?.filter(p => (p.category || 'OTHER') === category);
+                  // Case-insensitive matching; anything not FACE/BODY/LIFESTYLE (e.g. CCCD_FRONT/BACK or missing) falls into OTHER.
+                  const categoryPhotos = user.photos?.filter(p => {
+                    const raw = (p.category || '').toUpperCase();
+                    const bucket = raw === 'FACE' || raw === 'BODY' || raw === 'LIFESTYLE' ? raw : 'OTHER';
+                    return bucket === category;
+                  });
                   if (!categoryPhotos || categoryPhotos.length === 0) return null;
 
                   return (
@@ -316,20 +332,52 @@ const UserDetailPage: React.FC = () => {
                               aspectRatio: '3/4',
                               borderRadius: '12px',
                               backgroundColor: 'var(--border)',
-                              backgroundImage: photo.url ? `url(${photo.url})` : undefined,
-                              backgroundSize: 'cover',
-                              backgroundPosition: 'center',
                               border: photo.isPublic ? '2px solid var(--success)' : '2px solid var(--border)',
                               overflow: 'hidden',
-                              cursor: 'pointer',
+                              cursor: photo.url ? 'pointer' : 'default',
+                              position: 'relative',
                             }}
-                            onClick={() => window.open(photo.url, '_blank')}
+                            onClick={() => {
+                              // 'noreferrer' is critical: without it, window.open propagates the
+                              // admin origin in the Referer header and Google Drive rate-limits (429).
+                              // 'noopener' is standard hygiene so the new tab can't reach window.opener.
+                              if (photo.url) window.open(photo.url, '_blank', 'noopener,noreferrer');
+                            }}
                             >
-                              {!photo.url && (
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-                                  <Image size={32} color="var(--text-secondary)" />
-                                </div>
-                              )}
+                              {photo.url ? (
+                                <img
+                                  src={optimizeImageUrl(photo.url, 400)}
+                                  alt=""
+                                  loading="lazy"
+                                  // Google Drive /thumbnail throttles per Referer. Without this
+                                  // the browser sends our admin origin and Drive 429s the request.
+                                  // Opening the URL in a new tab works because there is no Referer.
+                                  referrerPolicy="no-referrer"
+                                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                  onError={(e) => {
+                                    const img = e.currentTarget;
+                                    img.style.display = 'none';
+                                    const fallback = img.nextElementSibling as HTMLElement | null;
+                                    if (fallback) fallback.style.display = 'flex';
+                                  }}
+                                />
+                              ) : null}
+                              <div
+                                style={{
+                                  display: photo.url ? 'none' : 'flex',
+                                  alignItems: 'center', justifyContent: 'center',
+                                  width: '100%', height: '100%',
+                                  position: 'absolute', inset: 0,
+                                  backgroundColor: 'var(--border)',
+                                  color: 'var(--text-secondary)',
+                                  flexDirection: 'column', gap: '4px',
+                                }}
+                              >
+                                <Image size={32} />
+                                {photo.url && (
+                                  <span style={{ fontSize: '10px', opacity: 0.7 }}>{t('pages.users.detail.photos.loadError', 'Không tải được ảnh')}</span>
+                                )}
+                              </div>
                             </div>
                             <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                               <Badge variant={photo.isPublic ? 'success' : 'danger'} style={{ fontSize: '10px' }}>
@@ -361,8 +409,8 @@ const UserDetailPage: React.FC = () => {
                   );
                 })}
               </div>
-            </Card>
-          )}
+            )}
+          </Card>
 
           {/* Round 2 Evaluation Data */}
           {user.round2Evaluation && (
@@ -498,6 +546,17 @@ const UserDetailPage: React.FC = () => {
                           <Typography variant="caption">{user.round2Evaluation.data.lifeOrientation}/5</Typography>
                         </div>
                       </div>
+                      {typeof user.round2Evaluation.data.openness === 'number' && (
+                        <div>
+                          <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.openness')}</Typography>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
+                            <div style={{ flex: 1, height: '4px', backgroundColor: 'var(--border)', borderRadius: '2px' }}>
+                              <div style={{ width: `${(user.round2Evaluation.data.openness / 5) * 100}%`, height: '100%', backgroundColor: '#f59e0b', borderRadius: '2px' }}></div>
+                            </div>
+                            <Typography variant="caption">{user.round2Evaluation.data.openness}/5</Typography>
+                          </div>
+                        </div>
+                      )}
                       <div>
                         <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.decisionStyle')}</Typography>
                         <Typography variant="body" style={{ fontWeight: 600 }}>{user.round2Evaluation.data.decisionStyle}</Typography>
@@ -526,7 +585,7 @@ const UserDetailPage: React.FC = () => {
                       <div style={{ padding: '12px', backgroundColor: 'var(--border)', borderRadius: '8px', opacity: 0.8 }}>
                         <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.preferredAgeRange')}</Typography>
                         <Typography variant="h2" style={{ margin: '4px 0 0 0', fontSize: '18px', color: 'var(--primary)' }}>
-                          {user.round2Evaluation.data.preferredAgeMin} — {user.round2Evaluation.data.preferredAgeMax} {t('pages.users.detail.fields.age')?.split('/')[0] || 'years'}
+                          {user.round2Evaluation.data.preferredAgeMin} — {user.round2Evaluation.data.preferredAgeMax} {t('pages.users.detail.yearsSuffix')}
                         </Typography>
                         <div style={{ marginTop: '8px' }}>
                           <Badge variant={user.round2Evaluation.data.ageFlexible ? 'success' : 'info'}>
@@ -572,6 +631,18 @@ const UserDetailPage: React.FC = () => {
                     <Typography variant="body" style={{ fontWeight: 600 }}>{user.evaluation.gender}</Typography>
                   </div>
                   <div>
+                    <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.preferGender')}</Typography>
+                    <div style={{ display: 'flex', gap: '4px', marginTop: '4px', flexWrap: 'wrap' }}>
+                      {(user.evaluation.preferGender && user.evaluation.preferGender.length > 0) ? (
+                        user.evaluation.preferGender.map((g, idx) => (
+                          <Badge key={idx} variant="info">{g}</Badge>
+                        ))
+                      ) : (
+                        <Typography variant="body" style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.notProvided')}</Typography>
+                      )}
+                    </div>
+                  </div>
+                  <div>
                     <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.age')}</Typography>
                     <Typography variant="body" style={{ fontWeight: 600 }}>
                       {formatDate(user.evaluation.birthdate)}
@@ -580,6 +651,10 @@ const UserDetailPage: React.FC = () => {
                   <div>
                     <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.education')}</Typography>
                     <Typography variant="body" style={{ fontWeight: 600 }}>{user.evaluation.education}</Typography>
+                  </div>
+                  <div>
+                    <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.phoneNumber')}</Typography>
+                    <Typography variant="body" style={{ fontWeight: 600 }}>{user.evaluation.phoneNumber || t('pages.users.detail.fields.notProvided')}</Typography>
                   </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -597,6 +672,22 @@ const UserDetailPage: React.FC = () => {
                       {user.evaluation.intentGoals.map((goal, idx) => (
                         <Badge key={idx} variant="info">{goal}</Badge>
                       ))}
+                    </div>
+                  </div>
+                  <div>
+                    <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.source')}</Typography>
+                    <Typography variant="body" style={{ fontWeight: 600 }}>{user.evaluation.source || t('pages.users.detail.fields.notProvided')}</Typography>
+                  </div>
+                  <div>
+                    <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.openToSameGender')}</Typography>
+                    <div style={{ marginTop: '4px' }}>
+                      {user.evaluation.openToSameGenderForBusiness === true ? (
+                        <Badge variant="success">{t('pages.users.detail.fields.yes')}</Badge>
+                      ) : user.evaluation.openToSameGenderForBusiness === false ? (
+                        <Badge variant="info">{t('pages.users.detail.fields.no')}</Badge>
+                      ) : (
+                        <Typography variant="body" style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{t('pages.users.detail.fields.notProvided')}</Typography>
+                      )}
                     </div>
                   </div>
                 </div>

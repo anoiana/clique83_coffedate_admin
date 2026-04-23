@@ -14,21 +14,21 @@
       "logout": "Đăng xuất"
     },
     "navigation": {
-      "dashboard": "Dashboard",
-      "dashboardAnalytics": "Dashboard Analytics",
+      "dashboard": "Bảng Điều Khiển",
+      "dashboardAnalytics": "Phân Tích Tổng Quan",
       "users": "Người Dùng",
       "userManagement": "Quản Lý Người Dùng",
       "userJourney": "Hành Trình Người Dùng",
-      "conversionFunnel": "Khuôn Đổ Chuyển Đổi",
+      "conversionFunnel": "Phễu Chuyển Đổi",
       "pendingProfiles": "Hồ Sơ Chờ Duyệt",
       "demographics": "Nhân Khẩu Học",
       "userDemographics": "Thống Kê Nhân Khẩu Người Dùng",
       "matching": "Gợi Ý Ghép Đôi",
-      "matchingEngine": "Động Cơ Ghép Đôi",
-      "unmatched": "Pool Chưa Ghép",
-      "unmatchedPool": "Pool Chưa Ghép",
+      "matchingEngine": "Hệ Thống Ghép Đôi",
+      "unmatched": "Danh Sách Chưa Ghép",
+      "unmatchedPool": "Danh Sách Chưa Ghép",
       "manualMatch": "Ghép Tay",
-      "forceManualMatch": "Ép Buộc Ghép Tay",
+      "forceManualMatch": "Ghép Tay Thủ Công",
       "meetings": "Cuộc Hẹn",
       "meetingsManagement": "Quản Lý Cuộc Hẹn",
       "locations": "Địa Điểm",
@@ -292,7 +292,15 @@
           "education": "Học Vấn",
           "workField": "Lĩnh Vực Công Việc",
           "incomeRange": "Khoảng Thu Nhập",
-          "intent": "Mục Đích / Mục Tiêu"
+          "intent": "Mục Đích / Mục Tiêu",
+          "preferGender": "Giới Tính Ưa Thích",
+          "phoneNumber": "Số Điện Thoại",
+          "source": "Nguồn Biết Đến",
+          "openToSameGender": "Mở Đối Tác Cùng Giới (Kinh Doanh)",
+          "openness": "Mức Độ Cởi Mở",
+          "yes": "Có",
+          "no": "Không",
+          "notProvided": "Chưa cung cấp"
         },
         "rounds": {
           "round1": "Vòng 1: Thông Tin Cơ Bản",
@@ -309,7 +317,8 @@
           "lifestyle": "LỐI SỐNG",
           "other": "KHÁC",
           "public": "Công khai",
-          "hidden": "Ẩn"
+          "hidden": "Ẩn",
+          "loadError": "Không tải được ảnh"
         },
         "adminActions": {
           "title": "Hành Động Quản Trị",
@@ -321,6 +330,14 @@
         "notFound": "Không tìm thấy người dùng",
         "backButton": "← Quay Lại",
         "copyIdButton": "Sao chép ID đầy đủ",
+        "reasonBadge": "Lý do: {{reason}}",
+        "photosEmpty": "Người dùng chưa tải lên ảnh",
+        "yearsSuffix": "tuổi",
+        "alerts": {
+          "approveSuccess": "Duyệt hồ sơ thành công!",
+          "rejectSuccess": "Đã từ chối hồ sơ. Email thông báo sẽ được gửi đi.",
+          "photoVisibilityFailed": "Không thể cập nhật hiển thị ảnh. Vui lòng thử lại."
+        },
         "wallet": {
           "title": "Tình trạng ví",
           "membershipPaidOn": "Thành viên đã thanh toán vào {date}"
@@ -415,6 +432,7 @@
         "criteria": "Ảnh Chụp Tiêu Chí",
         "actions": "Hành Động"
       },
+      "viewProfile": "Xem Hồ Sơ",
       "loading": "Đang quét Unmatched Pool..."
     },
     "manualMatch": {
@@ -437,7 +455,9 @@
         "r2Done": "V2 XONG",
         "r2Pending": "V2 CHỜ"
       },
-      "changeButton": "Thay đổi"
+      "changeButton": "Thay đổi",
+      "unnamed": "Chưa đặt tên",
+      "matchError": "Không thể ghép người dùng. Hãy kiểm tra điều kiện."
     },
     "demographics": {
       "title": "Thống Kê Nhân Khẩu Người Dùng",
@@ -503,6 +523,7 @@
     "userJourney": {
       "title": "Khuôn Đổ Chuyển Đổi",
       "description": "Theo dõi tiến trình người dùng từ lead ban đầu đến cuộc hẹn hoàn thành. Xác định nơi người dùng rời bỏ.",
+      "loading": "Đang dựng Hành Trình Người Dùng...",
       "funnelTitle": "Giai Đoạn Vòng Đời",
       "totalUsers": "TỔNG NGƯỜI DÙNG",
       "dropoff": "RỜI BỎ",
@@ -562,7 +583,24 @@
     "confirmButton": "Xác nhận Từ chối",
     "message": "Bạn đang thực hiện từ chối hồ sơ của <strong>{userName}</strong>. Vui lòng cung cấp lý do chi tiết để gửi phản hồi cho người dùng.",
     "label": "LÝ DO TỪ CHỐI",
-    "placeholder": "Nhập lý do chi tiết tại đây..."
+    "placeholder": "Nhập lý do chi tiết tại đây...",
+    "resubmitStepLabel": "PHẦN CẦN CHỈNH SỬA",
+    "resubmitStepHint": "Chọn phần user cần resubmit. Giúp họ biết chính xác chỗ nào cần sửa.",
+    "resubmitSteps": {
+      "none": "— Không chỉ định (tùy chọn) —",
+      "round1": "Round 1 — Khảo sát cơ bản",
+      "round2All": "Round 2 — Toàn bộ khảo sát",
+      "round2Values": "Round 2 — Giá trị sống",
+      "round2Match": "Round 2 — Tiêu chí match",
+      "round2Personality": "Round 2 — Tính cách",
+      "round2Lifestyle": "Round 2 — Lối sống",
+      "round2Interests": "Round 2 — Sở thích",
+      "round2Background": "Round 2 — Nền tảng",
+      "round2Expression": "Round 2 — Tự diễn đạt",
+      "photos": "Ảnh hồ sơ",
+      "round3": "Round 3 — Khảo sát nâng cao",
+      "fullReset": "Reset toàn bộ hồ sơ"
+    }
   },
   "userAlbum": {
     "title": "Thư viện ảnh"

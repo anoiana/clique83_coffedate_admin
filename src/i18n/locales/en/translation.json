@@ -17,7 +17,7 @@
       "dashboard": "Dashboard",
       "dashboardAnalytics": "Dashboard Analytics",
       "users": "Users",
-      "userManagement": "Users Management",
+      "userManagement": "User Management",
       "userJourney": "User Journey",
       "conversionFunnel": "Conversion Funnel",
       "pendingProfiles": "Pending Profiles",
@@ -30,7 +30,7 @@
       "manualMatch": "Manual Match",
       "forceManualMatch": "Force Manual Match",
       "meetings": "Meetings",
-      "meetingsManagement": "Meetings Management",
+      "meetingsManagement": "Meeting Management",
       "locations": "Locations",
       "meetingLocations": "Meeting Locations",
       "locationManagement": "Manage coffee shops and restaurants for date venues."
@@ -105,7 +105,7 @@
     "userId": "User ID",
     "userAId": "User A ID",
     "userBId": "User B ID",
-    "reason": "Nhập lý do chi tiết tại đây...",
+    "reason": "Enter detailed reason here...",
     "name": "Name *",
     "address": "Address *",
     "city": "City *",
@@ -292,7 +292,15 @@
           "education": "Education",
           "workField": "Work Field",
           "incomeRange": "Income Range",
-          "intent": "Intent / Goals"
+          "intent": "Intent / Goals",
+          "preferGender": "Preferred Gender",
+          "phoneNumber": "Phone Number",
+          "source": "Source",
+          "openToSameGender": "Open to Same-Gender (Business)",
+          "openness": "Openness",
+          "yes": "Yes",
+          "no": "No",
+          "notProvided": "Not provided"
         },
         "rounds": {
           "round1": "Round 1: Basic Information",
@@ -309,7 +317,8 @@
           "lifestyle": "LIFESTYLE",
           "other": "OTHER",
           "public": "Public",
-          "hidden": "Hidden"
+          "hidden": "Hidden",
+          "loadError": "Failed to load image"
         },
         "adminActions": {
           "title": "Admin Actions",
@@ -321,6 +330,14 @@
         "notFound": "User not found",
         "backButton": "← Back",
         "copyIdButton": "Copy Full ID",
+        "reasonBadge": "Reason: {{reason}}",
+        "photosEmpty": "User has not uploaded any photos",
+        "yearsSuffix": "years",
+        "alerts": {
+          "approveSuccess": "Profile approved successfully!",
+          "rejectSuccess": "Profile rejected. Email notification will be sent.",
+          "photoVisibilityFailed": "Failed to update photo visibility. Please try again."
+        },
         "wallet": {
           "title": "Wallet Status",
           "membershipPaidOn": "Membership paid on {date}"
@@ -415,6 +432,7 @@
         "criteria": "Criteria Snapshot",
         "actions": "Actions"
       },
+      "viewProfile": "View Profile",
       "loading": "Scanning Unmatched Pool..."
     },
     "manualMatch": {
@@ -437,7 +455,9 @@
         "r2Done": "R2 DONE",
         "r2Pending": "R2 PENDING"
       },
-      "changeButton": "Change"
+      "changeButton": "Change",
+      "unnamed": "Unnamed",
+      "matchError": "Failed to match users. Check if they meet all conditions."
     },
     "demographics": {
       "title": "User Demographics",
@@ -503,6 +523,7 @@
     "userJourney": {
       "title": "Conversion Funnel",
       "description": "Track user progression from initial lead to completed date. Identify where users are dropping off.",
+      "loading": "Mapping User Journey...",
       "funnelTitle": "Lifecycle Phase",
       "totalUsers": "TOTAL USERS",
       "dropoff": "DROPOFF",
@@ -562,7 +583,24 @@
     "confirmButton": "Confirm Reject",
     "message": "You are rejecting <strong>{userName}</strong>'s profile. Please provide a detailed reason to send feedback to the user.",
     "label": "REJECTION REASON",
-    "placeholder": "Enter detailed reason here..."
+    "placeholder": "Enter detailed reason here...",
+    "resubmitStepLabel": "SECTION TO RESUBMIT",
+    "resubmitStepHint": "Select the section the user needs to resubmit. Helps them pinpoint exactly what to fix.",
+    "resubmitSteps": {
+      "none": "— Unspecified (optional) —",
+      "round1": "Round 1 — Basic survey",
+      "round2All": "Round 2 — Full survey",
+      "round2Values": "Round 2 — Life values",
+      "round2Match": "Round 2 — Match criteria",
+      "round2Personality": "Round 2 — Personality",
+      "round2Lifestyle": "Round 2 — Lifestyle",
+      "round2Interests": "Round 2 — Interests",
+      "round2Background": "Round 2 — Background",
+      "round2Expression": "Round 2 — Self expression",
+      "photos": "Profile photos",
+      "round3": "Round 3 — Advanced survey",
+      "fullReset": "Full profile reset"
+    }
   },
   "userAlbum": {
     "title": "Gallery"

@@ -50,6 +50,8 @@ export interface UserDetail {
     workField: string;
     incomeRange: string;
     intentGoals: string[];
+    source?: string | null;
+    openToSameGenderForBusiness?: boolean | null;
     phoneNumber?: string;
     fullName?: string;
   };
@@ -67,6 +69,7 @@ export interface Round2Evaluation {
   data: {
     bio: string;
     height: number;
+    openness?: number;
     interests: string[];
     languages: string[];
     ageFlexible: boolean;
@@ -114,8 +117,23 @@ export interface PendingProfile {
   submittedAt?: string; // Legacy field if any
 }
 
+export type ResubmitStep =
+  | 'ROUND_1'
+  | 'ROUND_2_ALL'
+  | 'ROUND_2_VALUES'
+  | 'ROUND_2_MATCH'
+  | 'ROUND_2_PERSONALITY'
+  | 'ROUND_2_LIFESTYLE'
+  | 'ROUND_2_INTERESTS'
+  | 'ROUND_2_BACKGROUND'
+  | 'ROUND_2_EXPRESSION'
+  | 'PHOTOS'
+  | 'ROUND_3'
+  | 'FULL_RESET';
+
 export interface RejectRequest {
   reason: string;
+  resubmitStep?: ResubmitStep;
 }
 
 export interface PhotoVisibilityRequest {
@@ -185,8 +203,9 @@ export const userApi = {
   },
 
   // 5. POST /admin/users/:id/reject — Từ chối hồ sơ
-  rejectUser: async (id: string, reason: string): Promise<{ success: boolean; message: string }> => {
-    return apiClient.post(API_CONFIG.ENDPOINTS.REJECT_USER(id), { reason } as RejectRequest);
+  rejectUser: async (id: string, reason: string, resubmitStep?: ResubmitStep): Promise<{ success: boolean; message: string }> => {
+    const payload: RejectRequest = resubmitStep ? { reason, resubmitStep } : { reason };
+    return apiClient.post(API_CONFIG.ENDPOINTS.REJECT_USER(id), payload);
   },
 
   // 6. PATCH /admin/users/:id/photo-visibility — Quản lý ẩn/hiện ảnh

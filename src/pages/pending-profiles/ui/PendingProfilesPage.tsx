@@ -6,7 +6,7 @@ import { userApi, PendingProfile } from '../../../features/user/api/userApi';
 import { useLoading } from '../../../shared/context/LoadingContext';
 import { CheckCircle, XCircle, Clock, Eye, UserPlus, Search } from 'lucide-react';
 
-import { RejectionModal } from '../../../features/user/components/RejectionModal';
+import { RejectionModal, ResubmitStep } from '../../../features/user/components/RejectionModal';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -98,14 +98,14 @@ const PendingProfilesPage: React.FC = () => {
     });
   };
 
-  const handleConfirmReject = async (reason: string) => {
+  const handleConfirmReject = async (reason: string, resubmitStep?: ResubmitStep) => {
     const id = rejectionModal.userId;
     setRejectionModal(prev => ({ ...prev, isOpen: false }));
 
     setActionLoading(id);
     showLoader('pages.pendingProfiles.loading.rejecting');
     try {
-      await userApi.rejectUser(id, reason);
+      await userApi.rejectUser(id, reason, resubmitStep);
       setProfiles(prev => prev.filter(p => p.id !== id));
     } catch (error) {
       console.error('Failed to reject:', error);

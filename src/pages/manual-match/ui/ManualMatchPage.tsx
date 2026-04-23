@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, Typography, Badge, Button } from '../../../shared/components';
 import { userApi, UserSummary } from '../../../features/user/api/userApi';
 import { matchingApi } from '../../../features/matching/api/matchingApi';
@@ -7,7 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { useLoading } from '../../../shared/context/LoadingContext';
 
 const ManualMatchPage: React.FC = () => {
+    const { t } = useTranslation();
     const [users, setUsers] = useState<UserSummary[]>([]);
+    const [, setLoading] = useState(true);
     const [searchA, setSearchA] = useState('');
     const [searchB, setSearchB] = useState('');
     const [selectedA, setSelectedA] = useState<UserSummary | null>(null);
@@ -22,6 +25,8 @@ const ManualMatchPage: React.FC = () => {
                 setUsers(response?.users || []);
             } catch (error) {
                 console.error('Failed to fetch users:', error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchUsers();
@@ -48,14 +53,14 @@ const ManualMatchPage: React.FC = () => {
     const handleMatch = async () => {
         if (!selectedA || !selectedB) return;
         
-        showLoader('INITIATING MANUAL MATCH & AI STORY GENERATION');
+        showLoader(t('loading.initiatingMatch'));
         try {
             const result = await matchingApi.manualMatch(selectedA.id, selectedB.id);
             if (result.success) {
                 navigate(`/matching/${result.suggestionA.id}`);
             }
         } catch (error: any) {
-            alert(error.message || 'Failed to match users. Check if they meet all conditions.');
+            alert(error.message || t('pages.manualMatch.matchError'));
         } finally {
             hideLoader();
         }
@@ -94,18 +99,18 @@ const ManualMatchPage: React.FC = () => {
                             {selected.fullName?.[0] || 'U'}
                         </div>
                         <div>
-                            <Typography variant="body" style={{ fontWeight: 700 }}>{selected.fullName || 'Unnamed'}</Typography>
+                            <Typography variant="body" style={{ fontWeight: 700 }}>{selected.fullName || t('pages.manualMatch.unnamed')}</Typography>
                             <Typography variant="caption" style={{ color: 'var(--text-secondary)' }}>{selected.email}</Typography>
                         </div>
                     </div>
-                    <Button variant="secondary" onClick={() => setSelected(null)} style={{ padding: '4px 8px', fontSize: '10px' }}>Change</Button>
+                    <Button variant="secondary" onClick={() => setSelected(null)} style={{ padding: '4px 8px', fontSize: '10px' }}>{t('pages.manualMatch.changeButton')}</Button>
                 </div>
             ) : (
                 <div style={{ position: 'relative' }}>
                     <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
-                    <input 
-                        type="text" 
-                        placeholder="Search by name or email..."
+                    <input
+                        type="text"
+                        placeholder={t('pages.manualMatch.placeholderSearch')}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         style={{ 
@@ -129,10 +134,10 @@ const ManualMatchPage: React.FC = () => {
                                     onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                                 >
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Typography variant="body" style={{ fontWeight: 600, fontSize: '14px' }}>{u.fullName || 'Unnamed'}</Typography>
+                                        <Typography variant="body" style={{ fontWeight: 600, fontSize: '14px' }}>{u.fullName || t('pages.manualMatch.unnamed')}</Typography>
                                         <div style={{ display: 'flex', gap: '4px' }}>
-                                            {u.isMember ? <Badge variant="success" style={{ fontSize: '8px' }}>MEMBER</Badge> : <Badge variant="danger" style={{ fontSize: '8px' }}>GUEST</Badge>}
-                                            {u.round2Completed ? <Badge variant="info" style={{ fontSize: '8px' }}>R2 DONE</Badge> : <Badge variant="warning" style={{ fontSize: '8px' }}>R2 PENDING</Badge>}
+                                            {u.isMember ? <Badge variant="success" style={{ fontSize: '8px' }}>{t('pages.manualMatch.badges.member')}</Badge> : <Badge variant="danger" style={{ fontSize: '8px' }}>{t('pages.manualMatch.badges.guest')}</Badge>}
+                                            {u.round2Completed ? <Badge variant="info" style={{ fontSize: '8px' }}>{t('pages.manualMatch.badges.r2Done')}</Badge> : <Badge variant="warning" style={{ fontSize: '8px' }}>{t('pages.manualMatch.badges.r2Pending')}</Badge>}
                                         </div>
                                     </div>
                                     <Typography variant="caption" style={{ color: 'var(--text-secondary)', fontSize: '11px' }}>
@@ -149,11 +154,11 @@ const ManualMatchPage: React.FC = () => {
                 <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         {selected.isMember ? <CheckCircle size={14} color="#10b981" /> : <AlertCircle size={14} color="#ef4444" />}
-                        <Typography variant="caption" style={{ color: selected.isMember ? 'var(--text-primary)' : '#ef4444' }}>Official Member Status</Typography>
+                        <Typography variant="caption" style={{ color: selected.isMember ? 'var(--text-primary)' : '#ef4444' }}>{t('pages.manualMatch.requirements.memberStatus')}</Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         {selected.round2Completed ? <CheckCircle size={14} color="#10b981" /> : <AlertCircle size={14} color="#ef4444" />}
-                        <Typography variant="caption" style={{ color: selected.round2Completed ? 'var(--text-primary)' : '#ef4444' }}>Round 2 Completion</Typography>
+                        <Typography variant="caption" style={{ color: selected.round2Completed ? 'var(--text-primary)' : '#ef4444' }}>{t('pages.manualMatch.requirements.round2Completed')}</Typography>
                     </div>
                 </div>
             )}
@@ -163,48 +168,48 @@ const ManualMatchPage: React.FC = () => {
     return (
         <div style={{ maxWidth: '1000px', padding: '24px', margin: '0 auto' }}>
             <div style={{ marginBottom: '40px', textAlign: 'center' }}>
-                <Typography variant="h1" style={{ fontSize: '32px', marginBottom: '12px', fontWeight: 800 }}>Force Manual Match</Typography>
+                <Typography variant="h1" style={{ fontSize: '32px', marginBottom: '12px', fontWeight: 800 }}>{t('pages.manualMatch.title')}</Typography>
                 <Typography variant="body" style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-                    Bypass the automated engine to pair two specific users. AI will still generate their compatibility stories instantly.
+                    {t('pages.manualMatch.description')}
                 </Typography>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '40px' }}>
-                <UserSelector 
-                    label="FIRST USER (USER A)" 
-                    search={searchA} 
-                    setSearch={setSearchA} 
-                    selected={selectedA} 
-                    setSelected={setSelectedA} 
+                <UserSelector
+                    label={t('pages.manualMatch.labels.userA')}
+                    search={searchA}
+                    setSearch={setSearchA}
+                    selected={selectedA}
+                    setSelected={setSelectedA}
                     results={filteredA}
                 />
-                
+
                 <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,215,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed var(--primary)' }}>
                     <Zap size={24} color="var(--primary)" />
                 </div>
 
-                <UserSelector 
-                    label="SECOND USER (USER B)" 
-                    search={searchB} 
-                    setSearch={setSearchB} 
-                    selected={selectedB} 
-                    setSelected={setSelectedB} 
+                <UserSelector
+                    label={t('pages.manualMatch.labels.userB')}
+                    search={searchB}
+                    setSearch={setSearchB}
+                    selected={selectedB}
+                    setSelected={setSelectedB}
                     results={filteredB}
                 />
             </div>
 
             <Card style={{ background: 'rgba(255,215,0,0.02)', border: '1px solid rgba(255,215,0,0.1)', padding: '32px', textAlign: 'center' }}>
                 <Typography variant="body" style={{ marginBottom: '24px', display: 'block' }}>
-                    Both users must be <strong>Members</strong> and have <strong>Completed Round 2</strong> to be matched.
+                    <span dangerouslySetInnerHTML={{ __html: t('pages.manualMatch.note') }} />
                 </Typography>
-                
-                <Button 
-                    variant="success" 
+
+                <Button
+                    variant="success"
                     disabled={!selectedA || !selectedB || !selectedA.isMember || !selectedB.isMember || !selectedA.round2Completed || !selectedB.round2Completed}
                     onClick={handleMatch}
                     style={{ minWidth: '300px', padding: '16px', fontWeight: 800, borderRadius: '12px', fontSize: '16px' }}
                 >
-                    GENERATE MATCH & AI STORIES
+                    {t('pages.manualMatch.button')}
                 </Button>
             </Card>
         </div>

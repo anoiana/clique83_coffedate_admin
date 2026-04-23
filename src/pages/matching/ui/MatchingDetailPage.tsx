@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Card, Typography, Button } from '../../../shared/components';
 import { matchingApi, MatchSuggestion } from '../../../features/matching/api/matchingApi';
-import { Sparkles, BookOpen, Info, ArrowLeft, Zap } from 'lucide-react';
+import { Zap, Sparkles, BookOpen, Info, ArrowLeft } from 'lucide-react';
 
 const MatchingDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
