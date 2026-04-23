@@ -1,0 +1,582 @@
+{
+  "app": {
+    "title": "Cổng Quản Trị Clique83",
+    "version": "v1.0.0 Ổn định"
+  },
+  "layout": {
+    "sidebar": {
+      "brand": "CLIQUE83",
+      "brandSubtitle": "CỔNG QUẢN TRỊ"
+    },
+    "header": {
+      "adminLabel": "Quản Trị Hệ Thống",
+      "status": "Sẵn sàng",
+      "logout": "Đăng xuất"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "dashboardAnalytics": "Dashboard Analytics",
+      "users": "Người Dùng",
+      "userManagement": "Quản Lý Người Dùng",
+      "userJourney": "Hành Trình Người Dùng",
+      "conversionFunnel": "Khuôn Đổ Chuyển Đổi",
+      "pendingProfiles": "Hồ Sơ Chờ Duyệt",
+      "demographics": "Nhân Khẩu Học",
+      "userDemographics": "Thống Kê Nhân Khẩu Người Dùng",
+      "matching": "Gợi Ý Ghép Đôi",
+      "matchingEngine": "Động Cơ Ghép Đôi",
+      "unmatched": "Pool Chưa Ghép",
+      "unmatchedPool": "Pool Chưa Ghép",
+      "manualMatch": "Ghép Tay",
+      "forceManualMatch": "Ép Buộc Ghép Tay",
+      "meetings": "Cuộc Hẹn",
+      "meetingsManagement": "Quản Lý Cuộc Hẹn",
+      "locations": "Địa Điểm",
+      "meetingLocations": "Địa Điểm Cuộc Hẹn",
+      "locationManagement": "Quản lý quán cà phê và nhà hàng cho địa điểm hẹn hò."
+    }
+  },
+  "common": {
+    "actions": {
+      "save": "Lưu",
+      "cancel": "Hủy",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "update": "Cập Nhật",
+      "create": "Tạo",
+      "approve": "Duyệt",
+      "reject": "Từ Chối",
+      "view": "Xem",
+      "viewProfile": "Xem Hồ Sơ",
+      "search": "Tìm Kiếm",
+      "filter": "Lọc",
+      "refresh": "Làm Mới",
+      "back": "Quay Lại",
+      "next": "Tiếp",
+      "previous": "Trước",
+      "confirm": "Xác Nhận",
+      "close": "Đóng",
+      "submit": "Gửi",
+      "add": "Thêm",
+      "remove": "Xóa",
+      "language": "Ngôn ngữ"
+    },
+    "status": {
+      "loading": "Đang tải...",
+      "preparing": "Đang chuẩn bị trải nghiệm",
+      "success": "Thành công",
+      "error": "Lỗi",
+      "failed": "Thất bại",
+      "pending": "Đang chờ",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động",
+      "verified": "Đã xác minh",
+      "verifiedMember": "Thành Viên Đã Xác Minh",
+      "guest": "Khách",
+      "approved": "Đã duyệt",
+      "rejected": "Đã từ chối"
+    },
+    "messages": {
+      "noData": "Không có dữ liệu",
+      "noResults": "Không tìm thấy kết quả",
+      "noResultsMatch": "Không tìm thấy người dùng phù hợp với tiêu chí của bạn.",
+      "tryAdjustingSearch": "Hãy thử điều chỉnh từ khóa tìm kiếm \"{{searchTerm}}\"",
+      "allCaughtUp": "Đã xử lý hết!",
+      "nothingPending": "Không có hồ sơ nào đang chờ duyệt.",
+      "requiredField": "Trường bắt buộc",
+      "copiedToClipboard": "Đã sao chép ID vào clipboard"
+    },
+    "confirmation": {
+      "approveProfile": "Duyệt hồ sơ này? Người dùng sẽ được thêm vào pool ghép đôi.",
+      "rejectProfile": "Từ chối hồ sơ này?",
+      "deleteLocation": "Xóa '{{name}}'? Hành động này không thể hoàn tác.",
+      "deleteSeedData": "⚠️ Xóa TẤT CẢ dữ liệu demo? Bao gồm người dùng ảo, ví, giao dịch, cuộc hẹn... Không thể hoàn tác!",
+      "seedData": "⚠️ Tạo 50 người dùng ảo? Điều này sẽ tạo dữ liệu demo cho biểu đồ. Chạy Cleanup để xóa sau.",
+      "forceMatch": "Ghép nhanh 2 người dùng KHÔNG có email hoặc câu chuyện AI. Dùng để test luồng lịch hẹn và thanh toán.",
+      "checkDeadlines": "Ép kiểm tra tất cả deadline gợi ý? Các gợi ý hết hạn sẽ tự động bị từ chối.",
+      "manualMatchNote": "Cả hai người dùng phải là <strong>Thành Viên</strong> và đã <strong>Hoàn Thành Vòng 2</strong> để được ghép."
+    }
+  },
+  "placeholders": {
+    "searchUser": "Tìm kiếm theo tên hoặc email...",
+    "searchPairings": "Tìm kiếm cặp ghép đôi...",
+    "searchUserInput": "Tìm kiếm người dùng...",
+    "searchCity": "Lọc theo thành phố (ví dụ: Hồ Chí Minh)...",
+    "userId": "ID Người Dùng",
+    "userAId": "ID Người Dùng A",
+    "userBId": "ID Người Dùng B",
+    "reason": "Nhập lý do chi tiết tại đây...",
+    "name": "Tên *",
+    "address": "Địa chỉ *",
+    "city": "Thành phố *",
+    "description": "Mô tả",
+    "imageUrl": "URL Hình Ảnh",
+    "exampleName": "ví dụ: The Coffee House - Trần Hưng Đạo",
+    "exampleAddress": "ví dụ: 123 Trần Hưng Đạo, Quận 1",
+    "exampleCity": "ví dụ: Hồ Chí Minh",
+    "exampleDescription": "ví dụ: Không gian yên tĩnh, phù hợp cho buổi hẹn hò đầu tiên.",
+    "exampleImageUrl": "ví dụ: https://link-anh-quan-cafe.jpg"
+  },
+  "buttons": {
+    "runSeed": "Chạy Seed Data",
+    "runCleanup": "Chạy Cleanup",
+    "generateStories": "TẠO MATCH & CÂU CHUYỆN AI",
+    "addLocation": "Thêm Địa Điểm",
+    "addFirstLocation": "Thêm Địa Điểm Đầu Tiên",
+    "refreshQueue": "Làm Mới Queue",
+    "checkDeadlines": "Kiểm Tra Deadlines",
+    "releaseToUsers": "PHÁT HÀNH CHO NGƯỜI DÙNG",
+    "dismissMatch": "Hủy Match",
+    "regenerateStories": "Tạo Lại Câu Chuyện"
+  },
+  "loading": {
+    "verifyingProtocols": "ĐANG XÁC THỰC GIAO THỨC HỆ THỐNG",
+    "seedingData": "ĐANG TẠO DỮ LIỆU DEMO",
+    "cleaningUp": "ĐANG DỌN DẸP DỮ LIỆU DEMO",
+    "forceMatching": "ĐANG ÉP GHÉP",
+    "approvingProfile": "ĐANG DUYỆT HỒ SƠ",
+    "rejectingProfile": "ĐANG TỪ CHỐI HỒ SƠ",
+    "updatingLocation": "ĐANG CẬP NHẬT ĐỊA ĐIỂM",
+    "creatingLocation": "ĐANG TẠO ĐỊA ĐIỂM",
+    "deletingLocation": "ĐANG XÓA ĐỊA ĐIỂM",
+    "initiatingMatch": "ĐANG KHỞI ĐỘNG MANUAL MATCH & TẠO CÂU CHUYỆN AI",
+    "generatingStories": "Đang tạo câu chuyện AI...",
+    "analyzingPool": "Đang phân tích Match Pool...",
+    "scanningUnmatched": "Đang quét Unmatched Pool..."
+  },
+  "pages": {
+    "login": {
+      "title": "Clique83",
+      "subtitle": "Trung Tâm Điều Khiển Quản Trị",
+      "restrictedAccess": "Truy Cập Hạn Chế",
+      "instruction": "Hệ thống này dành riêng cho nhân sự được ủy quyền. Vui lòng nhập secret key của bạn để tiếp tục.",
+      "emailLabel": "EMAIL QUẢN TRỊ",
+      "secretLabel": "SECRET KEY HỆ THỐNG",
+      "button": "VÀO DASHBOARD",
+      "verificationFailed": "Xác thực thất bại. Vui lòng kiểm tra secret key."
+    },
+    "dashboard": {
+      "title": "Trí Tuệ Hệ Thống",
+      "welcome": "Chào mừng trở lại, Commander. Đây là những gì đang xảy ra với Clique83 hôm nay.",
+      "stats": {
+        "totalUsers": "Tổng Người Dùng",
+        "evaluations": "Đánh Giá",
+        "members": "Thành Viên",
+        "activeMatches": "Ghép Đang Hoạt Động",
+        "completedDates": "Cuộc Hẹn Hoàn Thành",
+        "users": "Người dùng"
+      },
+      "analytics": {
+        "title": "Phân Tích Thông Minh",
+        "timeframe": "KHOẢNG THỜI GIAN:",
+        "daily": "Xem Theo Ngày",
+        "weekly": "Xem Theo Tuần",
+        "monthly": "Xem Theo Tháng",
+        "yearly": "Xem Theo Năm",
+        "revenueTitle": "Doanh Thu Theo Thời Gian",
+        "revenueDescription": "Tổng doanh thu trong khoảng thời gian đã chọn",
+        "genderTitle": "Phân Bố Giới Tính",
+        "ageTitle": "Phân Bố Độ Tuổi",
+        "geographicTitle": "Trung Tâm Địa Lý",
+        "loading": "Đang tải dữ liệu phân tích..."
+      },
+      "dataManagement": {
+        "title": "Quản Lý Dữ Liệu",
+        "seedCard": {
+          "description": "Tạo 50 người dùng ảo, đánh giá, ví giao dịch và cuộc hẹn để lấp đầy biểu đồ dashboard.",
+          "button": "Tạo Dữ Liệu Demo",
+          "title": "Seed Demo Data"
+        },
+        "cleanupCard": {
+          "description": "Xóa tất cả dữ liệu demo (người dùng ảo, ví, giao dịch, cuộc hẹn). Giữ nguyên dữ liệu thực.",
+          "button": "Dọn Dẹp Dữ Liệu Demo",
+          "title": "Cleanup Demo Data",
+          "success": "Dọn dẹp hoàn tất thành công!"
+        },
+        "forceMatchCard": {
+          "title": "Ép Buộc Ghép (Test)",
+          "description": "Ghép nhanh 2 người dùng KHÔNG có câu chuyện AI hoặc email. Dùng để test luồng lịch hẹn và thanh toán.",
+          "userIdALabel": "ID Người Dùng A",
+          "userIdBLabel": "ID Người Dùng B",
+          "button": "Ép Ghép",
+          "success": "Đã tạo match giữa User A & User B. Kiểm tra Hàng đợi Ghép đôi."
+        }
+      },
+      "errors": {
+        "fetchFailed": "Không thể lấy analytics: {{error}}",
+        "revenueFailed": "Không thể lấy revenue analytics: {{error}}",
+        "seedFailed": "Tạo seed thất bại: {{error}}",
+        "cleanupFailed": "Dọn dẹp thất bại: {{error}}",
+        "forceMatchFailed": "Ghép thất bại: {{error}}"
+      }
+    },
+    "users": {
+      "list": {
+        "title": "Quản Lý Người Dùng",
+        "searchPlaceholder": "Tìm kiếm theo tên hoặc email...",
+        "filterStatus": "Lọc Theo Trạng Thái:",
+        "filters": {
+          "all": "Tất Cả Người Dùng",
+          "verified": "Thành Viên Đã Xác Minh",
+          "guest": "Người Dùng Khách",
+          "round2Complete": "Đã Hoàn Thành Cả 2 Vòng ✅",
+          "round1Only": "Chỉ Vòng 1",
+          "round2Only": "Chỉ Vòng 2",
+          "notStarted": "Chưa Bắt Đầu / Không Hoạt Động"
+        },
+        "table": {
+          "user": "Người Dùng",
+          "location": "Vị trí",
+          "membership": "Loại Tài Khoản",
+          "progress": "Tiến Độ",
+          "status": "Trạng Thái",
+          "joinedAt": "Ngày Tham Gia",
+          "actions": "Hành Động"
+        },
+        "badges": {
+          "member": "TV",
+          "guest": "KH",
+          "r1": "V1",
+          "r2": "V2"
+        },
+        "empty": "Không tìm thấy người dùng nào phù hợp với tiêu chí của bạn.",
+        "loading": "Đang tải người dùng...",
+        "description": "Quản lý tất cả người dùng trong hệ thống."
+      },
+      "detail": {
+        "title": "Góc Quản Trị: Hồ Sơ Người Dùng",
+        "section": {
+          "basicInfo": "Thông Tin Cơ Bản",
+          "photos": "Tài sản trí tuệ (Ảnh)",
+          "photosDescription": "Ảnh tải lên của người dùng để xác minh và ghép đôi",
+          "personality": "Dữ liệu tính cách & lối sống (Vòng 2)",
+          "evaluation": "Dữ liệu đánh giá (Vòng 1)",
+          "process": "Tiến trình xử lý",
+          "matching": "Sở thích ghép đôi"
+        },
+        "badges": {
+          "emailVerified": "Email Đã Xác Minh",
+          "verifiedMember": "Thành Viên Đã Xác Minh",
+          "guest": "Khách",
+          "inPool": "Trong Pool Ghép",
+          "pending": "Chờ Duyệt",
+          "active": "Hoạt Động",
+          "notInPool": "Không trong pool"
+        },
+        "fields": {
+          "email": "Email",
+          "joined": "Tham Gia",
+          "lastUpdate": "Cập Nhật Cuối",
+          "location": "Vị trí",
+          "notSet": "Chưa đặt",
+          "bio": "Tiểu Sử Cá Nhân",
+          "height": "Chiều Cao",
+          "languages": "Ngôn Ngữ",
+          "religion": "Tôn Giáo / Niềm Tin",
+          "interests": "Sở Thích",
+          "loveStyle": "Tình Yêu & Gắn Bó",
+          "loveLanguages": "Ngôn Ngữ Yêu Thương",
+          "attachmentStyle": "Phong Cách Gắn Bó",
+          "dynamics": "Động Lực",
+          "socialEnergy": "Năng Lượng Xã Hội",
+          "fitnessLevel": "Mức Độ Thể Hình",
+          "lifeOrientation": "Hướng Đời Sống",
+          "decisionStyle": "Phong Cách Ra Quyết Định",
+          "communicationStyle": "Phong Cách Giao Tiếp",
+          "preferredAgeRange": "Phạm Vi Tuổi Ưa Thích",
+          "ageFlexible": "Linh Hoạt Về Tuổi",
+          "ageStrict": "Khoảng Tuổi Nghiêm Ngặt",
+          "lifePriorities": "Ưu Tiên Đời Sống",
+          "gender": "Giới Tính",
+          "age": "Tuổi / Ngày Sinh",
+          "education": "Học Vấn",
+          "workField": "Lĩnh Vực Công Việc",
+          "incomeRange": "Khoảng Thu Nhập",
+          "intent": "Mục Đích / Mục Tiêu"
+        },
+        "rounds": {
+          "round1": "Vòng 1: Thông Tin Cơ Bản",
+          "completed": "Đã Hoàn Thành",
+          "pending": "Đang Chờ",
+          "round2": "Vòng 2: Tính Cách / Câu Hỏi Sâu",
+          "fullOnboarding": "Hoàn Thành Toàn Bộ",
+          "inProgress": "Đang Xử Lý",
+          "matchingPool": "Pool Ghép Đôi"
+        },
+        "photos": {
+          "face": "MẶT",
+          "body": "CƠ THỂ",
+          "lifestyle": "LỐI SỐNG",
+          "other": "KHÁC",
+          "public": "Công khai",
+          "hidden": "Ẩn"
+        },
+        "adminActions": {
+          "title": "Hành Động Quản Trị",
+          "description": "Hồ sơ này đang chờ bạn duyệt. Duyệt để thêm vào pool ghép đôi, hoặc từ chối với lý do.",
+          "approve": "Duyệt Hồ Sơ",
+          "reject": "Từ Chối Hồ Sơ"
+        },
+        "loading": "Đang tải chi tiết người dùng...",
+        "notFound": "Không tìm thấy người dùng",
+        "backButton": "← Quay Lại",
+        "copyIdButton": "Sao chép ID đầy đủ",
+        "wallet": {
+          "title": "Tình trạng ví",
+          "membershipPaidOn": "Thành viên đã thanh toán vào {date}"
+        }
+      }
+    },
+    "pendingProfiles": {
+      "title": "Hồ Sơ Chờ Duyệt",
+      "count": "{{count}}/{{total}} hồ sơ đang chờ xem xét",
+      "pendingCount": "{{count}} đang chờ",
+      "loading": {
+        "default": "Đang tải hồ sơ chờ duyệt...",
+        "approving": "Đang duyệt hồ sơ...",
+        "rejecting": "Đang từ chối hồ sơ..."
+      },
+      "searchPlaceholder": "Tìm kiếm theo tên hoặc email...",
+      "noResults": "Không tìm thấy kết quả",
+      "trySearch": "Hãy thử điều chỉnh từ khóa tìm kiếm cho \"{{searchTerm}}\"",
+      "allCaughtUp": "Đã xử lý hết!",
+      "nothingPending": "Không có hồ sơ nào đang chờ duyệt.",
+      "submitted": "Đã Nộp",
+      "actions": {
+        "approve": "Duyệt",
+        "reject": "Từ Chối",
+        "viewDetails": "Xem Chi Tiết"
+      }
+    },
+    "matching": {
+      "list": {
+        "title": "Hàng Đợi Ghép Đôi",
+        "description": "Các cặp ghép đôi do AI đề xuất đang chờ xác minh.",
+        "actions": {
+          "checkDeadlines": "Kiểm Tra Deadlines"
+        },
+        "confirm": {
+          "checkDeadlines": "Buộc kiểm tra tất cả deadlines đề xuất ngay bây giờ? Các đề xuất hết hạn sẽ tự động bị từ chối."
+        },
+        "loading": {
+          "default": "Đang phân tích Match Pool...",
+          "checkingDeadlines": "ĐANG KIỂM TRA DEADLINES"
+        },
+        "success": {
+          "deadlinesChecked": "Đã xử lý! {{count}} đề xuất đã hết hạn và bị từ chối."
+        },
+        "error": {
+          "deadlineCheckFailed": "Không thể kiểm tra deadlines. Vui lòng thử lại."
+        },
+        "table": {
+          "matchId": "MATCH ID",
+          "userA": "NGƯỜI DÙNG A",
+          "score": "ĐIỂM",
+          "userB": "NGƯỜI DÙNG B",
+          "deadline": "HẠN",
+          "action": "HÀNH ĐỘNG",
+          "noPending": "Không có match nào đang chờ."
+        }
+      },
+      "detail": {
+        "title": "Động Cơ Ghép Đôi",
+        "description": "Xem xét các cặp ghép đôi do AI đề xuất và xác minh câu chuyện khả năng tương thích.",
+        "loading": "Đang tạo Câu Chuyện Khả Năng Tương Thích...",
+        "languageToggle": {
+          "vn": "VN",
+          "en": "EN"
+        },
+        "userLabelA": "NGƯỜI DÙNG A",
+        "userLabelB": "NGƯỜI DÙNG B",
+        "story": {
+          "personalStoryFor": "Câu Chuyện Cá Nhân Của {{name}}",
+          "hook": "CHÀO MỪNG",
+          "compatibilityThesis": "LUẬN ĐỀ TƯƠNG THÍCH",
+          "honestyCheck": "KIỂM TRA THÀNH THẬT",
+          "complementarity": "Bổ Sung & Trải Nghiệm",
+          "noStory": "Chưa có câu chuyện nào được tạo."
+        },
+        "actions": {
+          "regenerate": "Tạo Lại Câu Chuyện",
+          "dismiss": "Hủy Match",
+          "release": "PHÁT HÀNH CHO NGƯỜI DÙNG",
+          "selectPrompt": "Chọn một gợi ý để xem xét"
+        }
+      }
+    },
+    "unmatched": {
+      "title": "Pool Chưa Ghép",
+      "description": "Xem xét những người dùng không thể được ghép tự động bởi động cơ.",
+      "searchPlaceholder": "Tìm kiếm người dùng...",
+      "sections": {
+        "userInfo": "Thông Tin Người Dùng",
+        "lastAttempt": "Lần Thử Cuối",
+        "steps": "Các Bước",
+        "criteria": "Ảnh Chụp Tiêu Chí",
+        "actions": "Hành Động"
+      },
+      "loading": "Đang quét Unmatched Pool..."
+    },
+    "manualMatch": {
+      "title": "Ép Buộc Ghép Tay",
+      "description": "Bỏ qua động cơ tự động để ghép hai người dùng cụ thể. AI vẫn sẽ tạo câu chuyện tương thích ngay lập tức.",
+      "labels": {
+        "userA": "NGƯỜI DÙNG ĐẦU TIÊN (USER A)",
+        "userB": "NGƯỜI DÙNG THỨ HAI (USER B)"
+      },
+      "note": "Cả hai người dùng phải là <strong>Thành Viên</strong> và đã <strong>Hoàn Thành Vòng 2</strong> để được ghép.",
+      "button": "TẠO MATCH & CÂU CHUYỆN AI",
+      "requirements": {
+        "memberStatus": "Trạng Thái Thành Viên Chính Thức",
+        "round2Completed": "Hoàn Thành Vòng 2"
+      },
+      "placeholderSearch": "Tìm kiếm theo tên hoặc email...",
+      "badges": {
+        "member": "THÀNH VIÊN",
+        "guest": "KHÁCH",
+        "r2Done": "V2 XONG",
+        "r2Pending": "V2 CHỜ"
+      },
+      "changeButton": "Thay đổi"
+    },
+    "demographics": {
+      "title": "Thống Kê Nhân Khẩu Người Dùng",
+      "description": "Phân tích chi tiết các phân khúc người dùng dựa trên đánh giá.",
+      "loading": "Đang tải Thống Kê Nhân Khẩu Chi Tiết...",
+      "timeframe": "KHOẢNG THỜI GIAN:",
+      "dailyJoiners": "Người Tham Gia Hàng Ngày",
+      "weeklyJoiners": "Người Tham Gia Hàng Tuần",
+      "monthlyJoiners": "Người Tham Gia Hàng Tháng",
+      "yearlyJoiners": "Người Tham Gia Hàng Năm",
+      "genderTitle": "Phân Bố Giới Tính (Nhãn Gốc)",
+      "identityLabel": "Nhãn Danh Tính",
+      "count": "Số Lượng",
+      "percentage": "Tỷ Lệ",
+      "ageTitle": "Nhóm Tuổi",
+      "ageYears": "{{age}} Tuổi",
+      "geoTitle": "Phân Bố Địa Lý (Tất Cả Thành Phố)",
+      "cityLocation": "Thành Phố / Địa Điểm",
+      "userCount": "Số Lượng Người Dùng",
+      "marketShare": "Thị Phần"
+    },
+    "meetings": {
+      "title": "Quản Lý Cuộc Hẹn",
+      "description": "Theo dõi tất cả các buổi hẹn — từ lên lịch đến hoàn thành.",
+      "loading": "Đang tải cuộc hẹn...",
+      "tabs": {
+        "all": "Tất Cả",
+        "awaitingAvailability": "Chờ Xác Nhận Khả Năng",
+        "awaitingConfirmation": "Chờ Xác Nhận",
+        "confirmed": "Đã Xác Nhận",
+        "completed": "Đã Hoàn Thành",
+        "cancelled": "Đã Hủy"
+      },
+      "noMeetings": "Chưa có cuộc hẹn nào được lên lịch.",
+      "noMeetingsAll": "Chưa có cuộc hẹn nào được lên lịch.",
+      "noMeetingsWithStatus": "Không có cuộc hẹn {{status}} nào."
+    },
+    "locations": {
+      "title": "Địa Điểm Cuộc Hẹn",
+      "description": "Quản lý quán cà phê và nhà hàng cho địa điểm hẹn hò.",
+      "addButton": "Thêm Địa Điểm",
+      "searchPlaceholder": "Lọc theo thành phố (ví dụ: Hồ Chí Minh)...",
+      "noLocations": "Không tìm thấy địa điểm nào",
+      "noMatchFilter": "Không có địa điểm nào khớp với bộ lọc.",
+      "addFirstPrompt": "Thêm địa điểm cuộc hẹn đầu tiên để bắt đầu.",
+      "addFirstButton": "Thêm Địa Điểm Đầu Tiên",
+      "noImage": "Không có ảnh",
+      "editButton": "Sửa",
+      "modal": {
+        "titleAdd": "Thêm Địa Điểm Mới",
+        "titleEdit": "Sửa Địa Điểm",
+        "nameLabel": "Tên *",
+        "addressLabel": "Địa chỉ *",
+        "cityLabel": "Thành phố *",
+        "descriptionLabel": "Mô tả",
+        "imageUrlLabel": "URL Hình Ảnh",
+        "cancel": "Hủy",
+        "update": "Cập Nhật",
+        "create": "Tạo",
+        "requiredFields": "Các trường bắt buộc được đánh dấu với *"
+      }
+    },
+    "userJourney": {
+      "title": "Khuôn Đổ Chuyển Đổi",
+      "description": "Theo dõi tiến trình người dùng từ lead ban đầu đến cuộc hẹn hoàn thành. Xác định nơi người dùng rời bỏ.",
+      "funnelTitle": "Giai Đoạn Vòng Đời",
+      "totalUsers": "TỔNG NGƯỜI DÙNG",
+      "dropoff": "RỜI BỎ",
+      "optimization": "Tối Ưu Hóa Khuôn Đổ",
+      "conversionRate": "Tỷ lệ chuyển đổi tổng thể từ Lead đến Hoàn Thành: {{rate}}%",
+      "stages": {
+        "lead": "Lead",
+        "r1Done": "R1 Đã xong",
+        "memberPendingR2": "Thành viên chờ V2",
+        "readyMatching": "Sẵn sàng ghép",
+        "matched": "Đã ghép",
+        "meetingActive": "Cuộc hẹn đang hoạt động",
+        "completed": "Hoàn thành"
+      }
+    }
+  },
+  "badge": {
+    "member": "Thành Viên",
+    "guest": "Khách",
+    "round1": "Vòng 1",
+    "round2": "Vòng 2",
+    "approved": "Đã Duyệt",
+    "rejected": "Đã Từ Chối",
+    "pending": "Chờ Duyệt",
+    "full": "Đầy Đủ",
+    "partial": "Một Phần",
+    "public": "Công Khai",
+    "hidden": "Ẩn",
+    "emailVerified": "Email Đã Xác Minh",
+    "inPool": "Trong Pool Ghép",
+    "active": "Hoạt Động",
+    "notInPool": "Không trong pool",
+    "inProgress": "Đang thực hiện"
+  },
+  "pagination": {
+    "of": "trên",
+    "previous": "Trước",
+    "next": "Tiếp"
+  },
+  "table": {
+    "loading": "Đang tải...",
+    "noData": "Không có dữ liệu"
+  },
+  "errors": {
+    "generic": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "network": "Lỗi mạng. Vui lòng kiểm tra kết nối.",
+    "unauthorized": "Chưa xác thực. Vui lòng đăng nhập lại.",
+    "notFound": "Không tìm thấy tài nguyên.",
+    "validation": "Xác thực thất bại. Vui lòng kiểm tra dữ liệu nhập.",
+    "approveProfile": "Không thể duyệt hồ sơ. Vui lòng thử lại.",
+    "rejectProfile": "Không thể từ chối hồ sơ. Vui lòng thử lại."
+  },
+  "rejection": {
+    "title": "Từ chối hồ sơ",
+    "cancel": "Hủy",
+    "processing": "Đang xử lý...",
+    "confirmButton": "Xác nhận Từ chối",
+    "message": "Bạn đang thực hiện từ chối hồ sơ của <strong>{userName}</strong>. Vui lòng cung cấp lý do chi tiết để gửi phản hồi cho người dùng.",
+    "label": "LÝ DO TỪ CHỐI",
+    "placeholder": "Nhập lý do chi tiết tại đây..."
+  },
+  "userAlbum": {
+    "title": "Thư viện ảnh"
+  },
+  "userHistory": {
+    "title": "Nhật ký hệ thống",
+    "noActivity": "CHƯA CÓ HOẠT ĐỘNG GẦN ĐÂY"
+  },
+  "userWallet": {
+    "title": "Hồ sơ tài chính",
+    "balance": "$ 0.00"
+  },
+  "evaluationPanel": {
+    "title": "Bảng đánh giá",
+    "description": "Logic và điều khiển đánh giá sống động ở đây."
+  }
+}

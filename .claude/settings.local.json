@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npm install:*)",
+      "Bash(python -c \"import json,sys; data=json.load\\(sys.stdin\\); print\\(json.dumps\\(data, indent=2\\)\\)\")",
+      "Bash(node -e ':*)",
+      "Bash(grep -E '\\\\.\\(tsx|ts|jsx|js\\)$')",
+      "Bash(node add_missing_keys.js)",
+      "Bash(mv add_missing_keys.js add_missing_keys.cjs)",
+      "Bash(node add_missing_keys.cjs)",
+      "Bash(rm:*)",
+      "Bash(node add_missing_keys_en.cjs)",
+      "Bash(rm add_missing_keys_en.cjs)"
+    ]
+  }
+}

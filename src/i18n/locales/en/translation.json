@@ -1,0 +1,582 @@
+{
+  "app": {
+    "title": "Clique83 Admin Portal",
+    "version": "v1.0.0 Stable"
+  },
+  "layout": {
+    "sidebar": {
+      "brand": "CLIQUE83",
+      "brandSubtitle": "ADMIN PORTAL"
+    },
+    "header": {
+      "adminLabel": "System Admin",
+      "status": "Available",
+      "logout": "Logout"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "dashboardAnalytics": "Dashboard Analytics",
+      "users": "Users",
+      "userManagement": "Users Management",
+      "userJourney": "User Journey",
+      "conversionFunnel": "Conversion Funnel",
+      "pendingProfiles": "Pending Profiles",
+      "demographics": "Demographics",
+      "userDemographics": "User Demographics",
+      "matching": "Match Suggestions",
+      "matchingEngine": "Matching Engine",
+      "unmatched": "Unmatched Pool",
+      "unmatchedPool": "Unmatched Pool",
+      "manualMatch": "Manual Match",
+      "forceManualMatch": "Force Manual Match",
+      "meetings": "Meetings",
+      "meetingsManagement": "Meetings Management",
+      "locations": "Locations",
+      "meetingLocations": "Meeting Locations",
+      "locationManagement": "Manage coffee shops and restaurants for date venues."
+    }
+  },
+  "common": {
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "update": "Update",
+      "create": "Create",
+      "approve": "Approve",
+      "reject": "Reject",
+      "view": "View",
+      "viewProfile": "View Profile",
+      "search": "Search",
+      "filter": "Filter",
+      "refresh": "Refresh",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "confirm": "Confirm",
+      "close": "Close",
+      "submit": "Submit",
+      "add": "Add",
+      "remove": "Remove",
+      "language": "Language"
+    },
+    "status": {
+      "loading": "Loading...",
+      "preparing": "Preparing your experience",
+      "success": "Success",
+      "error": "Error",
+      "failed": "Failed",
+      "pending": "Pending",
+      "active": "Active",
+      "inactive": "Inactive",
+      "verified": "Verified",
+      "verifiedMember": "Verified Member",
+      "guest": "Guest",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "messages": {
+      "noData": "No data available",
+      "noResults": "No results found",
+      "noResultsMatch": "No users found matching your criteria.",
+      "tryAdjustingSearch": "Try adjusting your search terms for \"{{searchTerm}}\"",
+      "allCaughtUp": "All caught up!",
+      "nothingPending": "No profiles are waiting for review.",
+      "requiredField": "This field is required",
+      "copiedToClipboard": "Copied ID to clipboard"
+    },
+    "confirmation": {
+      "approveProfile": "Approve this profile? User will be added to matching pool.",
+      "rejectProfile": "Reject this profile?",
+      "deleteLocation": "Delete '{{name}}'? This action cannot be undone.",
+      "deleteSeedData": "⚠️ Delete ALL seed demo data? This includes virtual users, wallets, transactions, meetings... Cannot be undone!",
+      "seedData": "⚠️ Seed 50 virtual users? This will generate demo data for charts. Run Cleanup to remove later.",
+      "forceMatch": "Force-match two users WITHOUT AI story or email. Use to test scheduling & payment flows.",
+      "checkDeadlines": "Force-check all suggestion deadlines now? Expired suggestions will be automatically rejected.",
+      "manualMatchNote": "Both users must be Members and have Completed Round 2 to be matched."
+    }
+  },
+  "placeholders": {
+    "searchUser": "Search by name or email...",
+    "searchPairings": "Search pairings...",
+    "searchUserInput": "Search users...",
+    "searchCity": "Filter by city (e.g. Hồ Chí Minh)...",
+    "userId": "User ID",
+    "userAId": "User A ID",
+    "userBId": "User B ID",
+    "reason": "Nhập lý do chi tiết tại đây...",
+    "name": "Name *",
+    "address": "Address *",
+    "city": "City *",
+    "description": "Description",
+    "imageUrl": "Image URL",
+    "exampleName": "e.g. The Coffee House - Trần Hưng Đạo",
+    "exampleAddress": "e.g. 123 Trần Hưng Đạo, Quận 1",
+    "exampleCity": "e.g. Hồ Chí Minh",
+    "exampleDescription": "e.g. Không gian yên tĩnh, phù hợp cho buổi hẹn hò đầu tiên.",
+    "exampleImageUrl": "e.g. https://link-anh-quan-cafe.jpg"
+  },
+  "buttons": {
+    "runSeed": "Run Seed Data",
+    "runCleanup": "Run Cleanup",
+    "generateStories": "GENERATE MATCH & AI STORIES",
+    "addLocation": "Add Location",
+    "addFirstLocation": "Add First Location",
+    "refreshQueue": "Refresh Queue",
+    "checkDeadlines": "Check Deadlines",
+    "releaseToUsers": "RELEASE TO USERS",
+    "dismissMatch": "Dismiss Match",
+    "regenerateStories": "Regenerate Stories"
+  },
+  "loading": {
+    "verifyingProtocols": "VERIFYING SYSTEM PROTOCOLS",
+    "seedingData": "SEEDING DEMO DATA",
+    "cleaningUp": "CLEANING UP DEMO DATA",
+    "forceMatching": "FORCE MATCHING",
+    "approvingProfile": "APPROVING PROFILE",
+    "rejectingProfile": "REJECTING PROFILE",
+    "updatingLocation": "UPDATING LOCATION",
+    "creatingLocation": "CREATING LOCATION",
+    "deletingLocation": "DELETING LOCATION",
+    "initiatingMatch": "INITIATING MANUAL MATCH & AI STORY GENERATION",
+    "generatingStories": "Generating AI stories...",
+    "analyzingPool": "Analyzing Match Pool...",
+    "scanningUnmatched": "Scanning Unmatched Pool..."
+  },
+  "pages": {
+    "login": {
+      "title": "Clique83",
+      "subtitle": "Admin Control Center",
+      "restrictedAccess": "Restricted Access",
+      "instruction": "This system is for authorized personnel only. Please provide your secret key to continue.",
+      "emailLabel": "ADMIN EMAIL",
+      "secretLabel": "SYSTEM SECRET KEY",
+      "button": "Access Dashboard",
+      "verificationFailed": "Verification failed. Please check your secret key."
+    },
+    "dashboard": {
+      "title": "System Intelligence",
+      "welcome": "Welcome back, Commander. Here's what's happening with Clique83 today.",
+      "stats": {
+        "totalUsers": "Total Users",
+        "evaluations": "Evaluations",
+        "members": "Members",
+        "activeMatches": "Active Matches",
+        "completedDates": "Completed Dates",
+        "users": "Users"
+      },
+      "analytics": {
+        "title": "Intelligence Analytics",
+        "timeframe": "TIMEFRAME:",
+        "daily": "Daily View",
+        "weekly": "Weekly View",
+        "monthly": "Monthly View",
+        "yearly": "Yearly View",
+        "revenueTitle": "Revenue Trajectory",
+        "revenueDescription": "Total income flow over the selected period",
+        "genderTitle": "Gender Diversity",
+        "ageTitle": "Age Distribution",
+        "geographicTitle": "Geographic Centers",
+        "loading": "Loading analytics data..."
+      },
+      "dataManagement": {
+        "title": "Data Management",
+        "seedCard": {
+          "description": "Generate 50 virtual users, evaluations, wallet transactions & meetings to populate dashboard charts.",
+          "button": "Seed Demo Data",
+          "title": "Seed Demo Data"
+        },
+        "cleanupCard": {
+          "description": "Delete all seed demo data (users, wallets, transactions, meetings). Leaves real data intact.",
+          "button": "Cleanup Demo Data",
+          "title": "Cleanup Demo Data",
+          "success": "Cleanup completed successfully!"
+        },
+        "forceMatchCard": {
+          "title": "Force Match (Test)",
+          "description": "Quick-match two users WITHOUT AI story or email. Use to test scheduling & payment flows.",
+          "userIdALabel": "User A ID",
+          "userIdBLabel": "User B ID",
+          "button": "Force Match",
+          "success": "Match created between User A & User B. Check Matching Queue."
+        }
+      },
+      "errors": {
+        "fetchFailed": "Failed to fetch analytics: {{error}}",
+        "revenueFailed": "Failed to fetch revenue analytics: {{error}}",
+        "seedFailed": "Seed failed: {{error}}",
+        "cleanupFailed": "Cleanup failed: {{error}}",
+        "forceMatchFailed": "Match failed: {{error}}"
+      }
+    },
+    "users": {
+      "list": {
+        "title": "Users Management",
+        "searchPlaceholder": "Search by name or email...",
+        "filterStatus": "Filter Status:",
+        "filters": {
+          "all": "All Users",
+          "verified": "Verified Members",
+          "guest": "Guest Users",
+          "round2Complete": "Both Rounds Completed ✅",
+          "round1Only": "Round 1 Only",
+          "round2Only": "Round 2 Only",
+          "notStarted": "Not Started / Inactive"
+        },
+        "table": {
+          "user": "User",
+          "location": "Location",
+          "membership": "Membership",
+          "progress": "Progress",
+          "status": "Status",
+          "joinedAt": "Joined At",
+          "actions": "Actions"
+        },
+        "badges": {
+          "member": "MEMBER",
+          "guest": "GUEST",
+          "r1": "R1",
+          "r2": "R2"
+        },
+        "empty": "No users found matching your criteria.",
+        "loading": "Loading users...",
+        "description": "Manage all users in the system."
+      },
+      "detail": {
+        "title": "Commander View: User Profile",
+        "section": {
+          "basicInfo": "Basic Information",
+          "photos": "Intelligence Assets (Photos)",
+          "photosDescription": "User uploaded photos for verification and matching",
+          "personality": "Personality & Lifestyle Data (Round 2)",
+          "evaluation": "Evaluation Data (Round 1)",
+          "process": "Process Timeline",
+          "matching": "Matching Preferences"
+        },
+        "badges": {
+          "emailVerified": "Email Verified",
+          "verifiedMember": "Verified Member",
+          "guest": "Guest",
+          "inPool": "In Match Pool",
+          "pending": "Pending Review",
+          "active": "Active",
+          "notInPool": "Not in pool"
+        },
+        "fields": {
+          "email": "Email",
+          "joined": "Joined",
+          "lastUpdate": "Last Update",
+          "location": "Location",
+          "notSet": "Not set",
+          "bio": "Personal Bio",
+          "height": "Height",
+          "languages": "Languages",
+          "religion": "Religion / Belief",
+          "interests": "Interests",
+          "loveStyle": "Love & Attachment",
+          "loveLanguages": "Love Languages",
+          "attachmentStyle": "Attachment Style",
+          "dynamics": "Dynamics",
+          "socialEnergy": "Social Energy",
+          "fitnessLevel": "Fitness Level",
+          "lifeOrientation": "Life Orientation",
+          "decisionStyle": "Decision Style",
+          "communicationStyle": "Communication Style",
+          "preferredAgeRange": "Preferred Age Range",
+          "ageFlexible": "Flexible with Age",
+          "ageStrict": "Strict Age Range",
+          "lifePriorities": "Life Priorities",
+          "gender": "Gender",
+          "age": "Age / Birthdate",
+          "education": "Education",
+          "workField": "Work Field",
+          "incomeRange": "Income Range",
+          "intent": "Intent / Goals"
+        },
+        "rounds": {
+          "round1": "Round 1: Basic Information",
+          "completed": "Completed",
+          "pending": "Pending",
+          "round2": "Round 2: Personality / Deep Questions",
+          "fullOnboarding": "Full Onboarding",
+          "inProgress": "In Progress",
+          "matchingPool": "Matching Pool"
+        },
+        "photos": {
+          "face": "FACE",
+          "body": "BODY",
+          "lifestyle": "LIFESTYLE",
+          "other": "OTHER",
+          "public": "Public",
+          "hidden": "Hidden"
+        },
+        "adminActions": {
+          "title": "Admin Actions",
+          "description": "This profile is waiting for your review. Approve to add to matching pool, or reject with a reason.",
+          "approve": "Approve Profile",
+          "reject": "Reject Profile"
+        },
+        "loading": "Loading user details...",
+        "notFound": "User not found",
+        "backButton": "← Back",
+        "copyIdButton": "Copy Full ID",
+        "wallet": {
+          "title": "Wallet Status",
+          "membershipPaidOn": "Membership paid on {date}"
+        }
+      }
+    },
+    "pendingProfiles": {
+      "title": "Pending Profiles",
+      "count": "{{count}} of {{total}} profiles waiting for review",
+      "pendingCount": "{{count}} pending",
+      "loading": {
+        "default": "Loading pending profiles...",
+        "approving": "Approving profile...",
+        "rejecting": "Rejecting profile..."
+      },
+      "searchPlaceholder": "Search by name or email...",
+      "noResults": "No results found",
+      "trySearch": "Try adjusting your search terms for \"{{searchTerm}}\"",
+      "allCaughtUp": "All caught up!",
+      "nothingPending": "No profiles are waiting for review.",
+      "submitted": "Submitted",
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "viewDetails": "View Details"
+      }
+    },
+    "matching": {
+      "list": {
+        "title": "Matching Queue",
+        "description": "Pending AI-curated pairings awaiting verification.",
+        "actions": {
+          "checkDeadlines": "Check Deadlines"
+        },
+        "confirm": {
+          "checkDeadlines": "Force-check all suggestion deadlines now? Expired suggestions will be automatically rejected."
+        },
+        "loading": {
+          "default": "Analyzing Match Pool...",
+          "checkingDeadlines": "CHECKING DEADLINES"
+        },
+        "success": {
+          "deadlinesChecked": "Processed! {{count}} suggestion(s) expired and rejected."
+        },
+        "error": {
+          "deadlineCheckFailed": "Failed to check deadlines. Please try again."
+        },
+        "table": {
+          "matchId": "MATCH ID",
+          "userA": "USER A",
+          "score": "SCORE",
+          "userB": "USER B",
+          "deadline": "DEADLINE",
+          "action": "ACTION",
+          "noPending": "No pending matches found."
+        }
+      },
+      "detail": {
+        "title": "Matching Engine",
+        "description": "Review AI-curated pairings and verify the compatibility stories.",
+        "loading": "Generating Compatibility Story...",
+        "languageToggle": {
+          "vn": "VN",
+          "en": "EN"
+        },
+        "userLabelA": "USER A",
+        "userLabelB": "USER B",
+        "story": {
+          "personalStoryFor": "Personal Story for {{name}}",
+          "hook": "THE HOOK",
+          "compatibilityThesis": "COMPATIBILITY THESIS",
+          "honestyCheck": "HONESTY CHECK",
+          "complementarity": "Complementarity & Experience",
+          "noStory": "No story generated yet."
+        },
+        "actions": {
+          "regenerate": "Regenerate Stories",
+          "dismiss": "Dismiss Match",
+          "release": "RELEASE TO USERS",
+          "selectPrompt": "Select a suggestion to review"
+        }
+      }
+    },
+    "unmatched": {
+      "title": "Unmatched Pool",
+      "description": "Review users who couldn't be automatically matched by the engine.",
+      "searchPlaceholder": "Search users...",
+      "sections": {
+        "userInfo": "User Info",
+        "lastAttempt": "Last Attempt",
+        "steps": "Steps",
+        "criteria": "Criteria Snapshot",
+        "actions": "Actions"
+      },
+      "loading": "Scanning Unmatched Pool..."
+    },
+    "manualMatch": {
+      "title": "Force Manual Match",
+      "description": "Bypass the automated engine to pair two specific users. AI will still generate their compatibility stories instantly.",
+      "labels": {
+        "userA": "FIRST USER (USER A)",
+        "userB": "SECOND USER (USER B)"
+      },
+      "note": "Both users must be <strong>Members</strong> and have <strong>Completed Round 2</strong> to be matched.",
+      "button": "GENERATE MATCH & AI STORIES",
+      "requirements": {
+        "memberStatus": "Official Member Status",
+        "round2Completed": "Round 2 Completion"
+      },
+      "placeholderSearch": "Search by name or email...",
+      "badges": {
+        "member": "MEMBER",
+        "guest": "GUEST",
+        "r2Done": "R2 DONE",
+        "r2Pending": "R2 PENDING"
+      },
+      "changeButton": "Change"
+    },
+    "demographics": {
+      "title": "User Demographics",
+      "description": "Exhaustive breakdown of user segments based on evaluations.",
+      "loading": "Loading Detailed Demographics...",
+      "timeframe": "TIMEFRAME:",
+      "dailyJoiners": "Daily Joiners",
+      "weeklyJoiners": "Weekly Joiners",
+      "monthlyJoiners": "Monthly Joiners",
+      "yearlyJoiners": "Yearly Joiners",
+      "genderTitle": "Gender Distribution (Raw Labels)",
+      "identityLabel": "Identity Label",
+      "count": "Count",
+      "percentage": "Percentage",
+      "ageTitle": "Age Groups",
+      "ageYears": "{{age}} Years",
+      "geoTitle": "Geographic Breakdown (All Cities)",
+      "cityLocation": "City/Location",
+      "userCount": "User Count",
+      "marketShare": "Market Share"
+    },
+    "meetings": {
+      "title": "Meetings Management",
+      "description": "Track all date sessions — from scheduling to completion.",
+      "loading": "Loading meetings...",
+      "tabs": {
+        "all": "All",
+        "awaitingAvailability": "Awaiting Availability",
+        "awaitingConfirmation": "Awaiting Confirmation",
+        "confirmed": "Confirmed",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "noMeetings": "No meetings have been scheduled yet.",
+      "noMeetingsAll": "No meetings have been scheduled yet.",
+      "noMeetingsWithStatus": "No {{status}} meetings."
+    },
+    "locations": {
+      "title": "Meeting Locations",
+      "description": "Manage coffee shops and restaurants for date venues.",
+      "addButton": "Add Location",
+      "searchPlaceholder": "Filter by city (e.g. Hồ Chí Minh)...",
+      "noLocations": "No locations found",
+      "noMatchFilter": "No locations match your filter.",
+      "addFirstPrompt": "Add your first meeting location to get started.",
+      "addFirstButton": "Add First Location",
+      "noImage": "No image",
+      "editButton": "Edit",
+      "modal": {
+        "titleAdd": "Add New Location",
+        "titleEdit": "Edit Location",
+        "nameLabel": "Name *",
+        "addressLabel": "Address *",
+        "cityLabel": "City *",
+        "descriptionLabel": "Description",
+        "imageUrlLabel": "Image URL",
+        "cancel": "Cancel",
+        "update": "Update",
+        "create": "Create",
+        "requiredFields": "Fields marked with * are required"
+      }
+    },
+    "userJourney": {
+      "title": "Conversion Funnel",
+      "description": "Track user progression from initial lead to completed date. Identify where users are dropping off.",
+      "funnelTitle": "Lifecycle Phase",
+      "totalUsers": "TOTAL USERS",
+      "dropoff": "DROPOFF",
+      "optimization": "Funnel Optimization",
+      "conversionRate": "Overall conversion rate from Lead to Completed: {{rate}}%",
+      "stages": {
+        "lead": "Lead",
+        "r1Done": "R1 Done",
+        "memberPendingR2": "Member Pending R2",
+        "readyMatching": "Ready Matching",
+        "matched": "Matched",
+        "meetingActive": "Meeting Active",
+        "completed": "Completed"
+      }
+    }
+  },
+  "badge": {
+    "member": "Member",
+    "guest": "Guest",
+    "round1": "Round 1",
+    "round2": "Round 2",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "pending": "Pending",
+    "full": "Full",
+    "partial": "Partial",
+    "public": "Public",
+    "hidden": "Hidden",
+    "emailVerified": "Email Verified",
+    "inPool": "In Match Pool",
+    "active": "Active",
+    "notInPool": "Not in pool",
+    "inProgress": "In Progress"
+  },
+  "pagination": {
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "table": {
+    "loading": "Loading...",
+    "noData": "No data to display"
+  },
+  "errors": {
+    "generic": "An error occurred. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "unauthorized": "Unauthorized. Please log in again.",
+    "notFound": "Resource not found.",
+    "validation": "Validation failed. Please check your input.",
+    "approveProfile": "Failed to approve profile. Please try again.",
+    "rejectProfile": "Failed to reject profile. Please try again."
+  },
+  "rejection": {
+    "title": "Reject Profile",
+    "cancel": "Cancel",
+    "processing": "Processing...",
+    "confirmButton": "Confirm Reject",
+    "message": "You are rejecting <strong>{userName}</strong>'s profile. Please provide a detailed reason to send feedback to the user.",
+    "label": "REJECTION REASON",
+    "placeholder": "Enter detailed reason here..."
+  },
+  "userAlbum": {
+    "title": "Gallery"
+  },
+  "userHistory": {
+    "title": "System Log",
+    "noActivity": "NO RECENT ACTIVITY RECORDED"
+  },
+  "userWallet": {
+    "title": "Financial Profile",
+    "balance": "$ 0.00"
+  },
+  "evaluationPanel": {
+    "title": "Evaluation Board",
+    "description": "Evaluation logic and controls live here."
+  }
+}
