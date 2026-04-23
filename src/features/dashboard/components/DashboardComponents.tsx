@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography, Card } from '../../../shared/components';
-import { Users, UserCheck, ShieldCheck, Heart, Calendar, TrendingUp, TrendingDown, LayoutDashboard } from 'lucide-react';
+import { Users, UserCheck, ShieldCheck, Heart, Calendar, TrendingUp, TrendingDown } from 'lucide-react';
 import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
     PieChart, Pie, Cell, Legend, BarChart, Bar

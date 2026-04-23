@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Card, Typography, Badge, Button, Pagination } from '../../../shared/components';
+import { Typography, Button, Pagination } from '../../../shared/components';
 import { matchingApi, MatchSuggestion } from '../../../features/matching/api/matchingApi';
 import { useLoading } from '../../../shared/context/LoadingContext';
-import { Heart, Clock, Zap, Search, ChevronRight, User, Timer } from 'lucide-react';
+import { Clock, Search, ChevronRight, Timer } from 'lucide-react';
 
 const MatchingListPage: React.FC = () => {
     const { t, i18n } = useTranslation();

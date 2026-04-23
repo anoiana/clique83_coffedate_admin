@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Card, Typography, Badge, Button } from '../../../shared/components';
+import { Card, Typography, Button } from '../../../shared/components';
 import { matchingApi, MatchSuggestion } from '../../../features/matching/api/matchingApi';
-import { Heart, Clock, Zap, Globe, Sparkles, BookOpen, Info, ArrowLeft } from 'lucide-react';
+import { Sparkles, BookOpen, Info, ArrowLeft, Zap } from 'lucide-react';
 
 const MatchingDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [match, setMatch] = useState<MatchSuggestion | null>(null);
     const [loading, setLoading] = useState(true);

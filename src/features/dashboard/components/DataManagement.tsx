@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Typography, Button, Badge } from '../../../shared/components';
+import { Card, Typography, Button } from '../../../shared/components';
 import { dashboardApi } from '../api/dashboardApi';
 import { useLoading } from '../../../shared/context/LoadingContext';
-import { Sparkles, Trash2, Zap, AlertTriangle } from 'lucide-react';
+import { Sparkles, Trash2, Zap } from 'lucide-react';
 import { useNotification } from '../../../shared/context/NotificationContext';
 
 export const DataManagement: React.FC = () => {
   const { t } = useTranslation();
   const { showLoader, hideLoader } = useLoading();
-  const { showSuccess, showError, showWarning } = useNotification();
+  const { showSuccess, showError } = useNotification();
   const [seedLoading, setSeedLoading] = useState(false);
   const [cleanupLoading, setCleanupLoading] = useState(false);
   const [forceMatchLoading, setForceMatchLoading] = useState(false);

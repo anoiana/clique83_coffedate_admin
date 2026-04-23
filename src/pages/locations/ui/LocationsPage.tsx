@@ -6,7 +6,7 @@ import { useLoading } from '../../../shared/context/LoadingContext';
 import { Plus, Edit2, Trash2, MapPin, Search, X, Image, Save } from 'lucide-react';
 
 const LocationsPage: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { showLoader, hideLoader } = useLoading();
   const [locations, setLocations] = useState<MeetingLocation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -103,10 +103,6 @@ const LocationsPage: React.FC = () => {
       hideLoader();
       setActionLoading(false);
     }
-  };
-
-  const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   };
 
   if (loading) {

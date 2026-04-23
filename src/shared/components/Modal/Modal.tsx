@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Typography } from '../Typography/Typography';
-import { Button } from '../Button/Button';
 import { X } from 'lucide-react';
 
 interface ModalProps {

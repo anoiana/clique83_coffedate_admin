@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, Typography, Badge, Button, Pagination } from '../../../shared/components';
 import { matchingApi, MatchSuggestion } from '../../../features/matching/api/matchingApi';
-import { Heart, Clock, MessageSquare, Zap, Globe, Info, Sparkles, BookOpen } from 'lucide-react';
+import { Heart, Clock, Zap, Globe, Sparkles } from 'lucide-react';
 
 const MatchingPage: React.FC = () => {
     const { t, i18n } = useTranslation();

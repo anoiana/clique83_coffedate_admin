@@ -54,10 +54,6 @@ export const AppLayout: React.FC = () => {
     return t('app.title');
   };
 
-  const isUserRoute = location.pathname.startsWith('/users') ||
-                      location.pathname === '/pending-profiles' ||
-                      location.pathname === '/user-journey';
-
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)' }}>
       {/* Sidebar */}

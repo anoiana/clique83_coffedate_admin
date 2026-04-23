@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Typography, Badge } from '../../../shared/components';
+import { Card, Typography } from '../../../shared/components';
 import { dashboardApi, LifecycleStage } from '../../../features/dashboard/api/dashboardApi';
-import { ArrowRight, Users, UserCheck, Heart, Coffee, CheckCircle2, TrendingDown } from 'lucide-react';
+import { Users, UserCheck, Heart, Coffee, CheckCircle2, TrendingDown } from 'lucide-react';
 
 const UserJourneyPage: React.FC = () => {
     const [stages, setStages] = useState<LifecycleStage[]>([]);
@@ -20,19 +20,6 @@ const UserJourneyPage: React.FC = () => {
         };
         fetchLifecycle();
     }, []);
-
-    const getStageIcon = (label: string) => {
-        switch(label) {
-            case 'Lead': return <Users size={20} />;
-            case 'R1_Done': return <CheckCircle2 size={20} />;
-            case 'Member_Pending_R2': return <UserCheck size={20} />;
-            case 'Ready_Matching': return <Coffee size={20} />;
-            case 'Matched': return <Heart size={20} />;
-            case 'Meeting_Active': return <Zap size={20} />;
-            case 'Completed': return <BadgeCheck size={20} />;
-            default: return <Users size={20} />;
-        }
-    };
 
     // Helper component for the funnel step
     const FunnelStep = ({ stage, nextValue, index }: { stage: LifecycleStage, nextValue?: number, index: number }) => {

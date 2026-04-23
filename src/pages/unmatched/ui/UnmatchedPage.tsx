@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Card, Typography, Badge, Table, Button, Pagination } from '../../../shared/components';
 import { matchingApi, UnmatchedRecord } from '../../../features/matching/api/matchingApi';
-import { Filter, AlertTriangle, ArrowRight, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const UnmatchedPage: React.FC = () => {
@@ -92,7 +92,7 @@ const UnmatchedPage: React.FC = () => {
                             </td>
                             <td style={{ padding: '20px' }}>
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', maxWidth: '400px' }}>
-                                    <Badge variant="secondary" style={{ fontSize: '10px' }}>{record.criteriaSnapshot.gender}</Badge>
+                                    <Badge variant="info" style={{ fontSize: '10px' }}>{record.criteriaSnapshot.gender}</Badge>
                                     {record.criteriaSnapshot.intentGoals.map((goal, i) => (
                                         <Badge key={i} variant="info" style={{ fontSize: '10px' }}>{goal}</Badge>
                                     ))}

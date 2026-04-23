@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Typography, Badge, Table, Pagination } from '../../../shared/components';
-import { dashboardApi, RevenueAnalytics, DemographicData } from '../../../features/dashboard/api/dashboardApi';
-import { Users, MapPin, PieChart as PieIcon, BarChart as BarIcon, Calendar } from 'lucide-react';
+import { Card, Typography, Badge, Table } from '../../../shared/components';
+import { dashboardApi, RevenueAnalytics } from '../../../features/dashboard/api/dashboardApi';
+import { MapPin } from 'lucide-react';
 
 const DemographicsPage: React.FC = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [data, setData] = useState<RevenueAnalytics | null>(null);
     const [timeframe, setTimeframe] = useState<'day' | 'week' | 'month' | 'year'>('month');
     const [loading, setLoading] = useState(true);

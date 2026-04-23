@@ -2,13 +2,12 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Card, Typography, Badge, Button } from '../../../shared/components';
 import { userApi, UserSummary } from '../../../features/user/api/userApi';
 import { matchingApi } from '../../../features/matching/api/matchingApi';
-import { Search, User as UserIcon, Zap, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { Search, Zap, CheckCircle, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLoading } from '../../../shared/context/LoadingContext';
 
 const ManualMatchPage: React.FC = () => {
     const [users, setUsers] = useState<UserSummary[]>([]);
-    const [loading, setLoading] = useState(true);
     const [searchA, setSearchA] = useState('');
     const [searchB, setSearchB] = useState('');
     const [selectedA, setSelectedA] = useState<UserSummary | null>(null);
@@ -23,8 +22,6 @@ const ManualMatchPage: React.FC = () => {
                 setUsers(response?.users || []);
             } catch (error) {
                 console.error('Failed to fetch users:', error);
-            } finally {
-                setLoading(false);
             }
         };
         fetchUsers();
